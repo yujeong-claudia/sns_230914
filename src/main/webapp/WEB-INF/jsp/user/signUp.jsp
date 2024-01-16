@@ -20,22 +20,22 @@
 			
 			<span class="sign-up-subject">Password</span>
 			<div class="m-3">
-				<input type="password" name="password" class="form-control col-6" placeholder="비밀번호를 입력하세요">
+				<input type="password" name="password" id="password" class="form-control col-6" placeholder="비밀번호를 입력하세요">
 			</div>
 
 			<span class="sign-up-subject">Confirm password</span>
 			<div class="m-3">
-				<input type="password" name="confirmPassword" class="form-control col-6" placeholder="비밀번호를 입력하세요">
+				<input type="password" name="confirmPassword" id="confirmPassword" class="form-control col-6" placeholder="비밀번호를 입력하세요">
 			</div>
 
 			<span class="sign-up-subject">Name</span>
 			<div class="m-3">
-				<input type="text" name="name" class="form-control col-6" placeholder="이름을 입력하세요">
+				<input type="text" name="name" id="name" class="form-control col-6" placeholder="이름을 입력하세요">
 			</div>
 
 			<span class="sign-up-subject">이메일</span>
 			<div class="m-3">
-				<input type="text" name="email" class="form-control col-6" placeholder="이메일을 입력하세요">
+				<input type="text" name="email" id="email" class="form-control col-6" placeholder="이메일을 입력하세요">
 			</div>
 			
 			<br>

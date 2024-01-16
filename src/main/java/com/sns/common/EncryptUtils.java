@@ -4,7 +4,6 @@ import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 
 public class EncryptUtils {
-	
 	// input: 원본 비밀번호
 	// output: 해싱된 비밀번호
 	public static String md5(String message) {
@@ -23,5 +22,5 @@ public class EncryptUtils {
 			e.printStackTrace();
 		}
 		return encData;
-	}
+	}	
 }
