@@ -72,10 +72,12 @@
 						<span class="font-weight-bold">${commentView.user.loginId}</span>
 						<span>${commentView.comment.content}</span>
 						
-						<%-- 댓글 삭제 버튼 --%>
-						<a href="#" class="comment-del-btn">
+						<%-- 댓글 삭제 버튼(자신의 댓글만 삭제 버튼 노출 --%>
+						<c:if test="${userId eq commentView.comment.userId}">
+						<a href="#" class="comment-del-btn" data-comment-id="${commentView.comment.id}">
 							<img src="https://www.iconninja.com/files/603/22/506/x-icon.png" width="10" height="10">
 						</a>
+						</c:if>
 					</div>
 					</c:forEach>
 					
@@ -218,11 +220,29 @@
 					alert("댓글 쓰기 실패했습니다.");
 				}
 			});
-			// 오늘(01/22)
-			// 댓글 삭제 -> alert안뜬다.
-			$(".comment-del-btn").on('click', function() {
-				alert("댓글 삭제한다");
-			});
 		});
+			// 댓글 삭제
+			$(".comment-del-btn").on('click', function(e) {
+				e.preventDefault(); //위로 올라감 방지
+				
+				let commentId = $(this).data("comment-id");
+				//alert(commentId);
+				
+				$.ajax({
+					type:"DELETE"
+					, url:"/comment/delete"
+					, data:{"commentId":commentId}
+					, success:function(data) {
+						if (data.code == 200) {
+							location.reload(true);
+						} else {
+							alert(data.error_message);
+						}
+					}
+					, error:function(request, status, error) {
+						alert("댓글 삭제 하는데 실패했습니다.");
+					}
+				});
+			});
 	});
 </script>
