@@ -4,6 +4,7 @@
  
 <mapper namespace="com.sns.like.mapper.LikeMapper">
 	
+	<!--  
 	<select id="selectLikeCountByPostIdUserId" parameterType="map" resultType="int">
 		SELECT
 			COUNT(1)
@@ -21,6 +22,19 @@
 			`like`
 		WHERE
 			`postId` = #{postId}
+	</select>-->
+	
+	<!-- like count 쿼리 하나로 합치기 -->
+	<select id="selectLikeCountByPostIdOrUserId" parameterType="map" resultType="int">
+		SELECT
+			COUNT(1)
+		FROM
+			`like`
+		WHERE
+			`postId` = #{postId}
+			<if test="userId != null">
+			AND `userId` = #{userId}
+			</if>
 	</select>
 	
 	<insert id="insertLike" parameterType="map">
