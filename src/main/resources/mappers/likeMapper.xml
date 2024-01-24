@@ -13,7 +13,7 @@
 			`postId` = #{postId}
 			AND `userId` = #{userId}
 	</select>
-	
+
 	<select id="selectLikeCountByPostId" parameterType="int" resultType="int">
 		SELECT
 			COUNT(1)

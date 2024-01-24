@@ -16,7 +16,7 @@ import com.sns.user.bo.UserBO;
 import com.sns.user.entity.UserEntity;
 
 @Service
-public class TimelineBO { //화면용 객체를 가공하는 곳, DB와는 관련없다
+public class TimelineBO { //화면용 객체를 가공하는 곳 db와는 관련없다.
 	
 	@Autowired
 	private PostBO postBO;
@@ -29,8 +29,8 @@ public class TimelineBO { //화면용 객체를 가공하는 곳, DB와는 관�
 	
 	@Autowired
 	private LikeBO likeBO;
-	
-	//input:X	output:List<CardView>
+
+	// input:X        output: List<CardView>
 	public List<CardView> generateCardViewList() {
 		List<CardView> cardViewList = new ArrayList<>();
 		
@@ -38,7 +38,7 @@ public class TimelineBO { //화면용 객체를 가공하는 곳, DB와는 관�
 		List<PostEntity> postList = postBO.getPostList();
 		
 		// 글 목록 반복문 순회
-		// post => cardView => cardViewList에 넣기
+		// post => cardView     => cardViewList에 넣기
 		for (PostEntity post : postList) {
 			// post 하나에 대응되는 하나의 카드를 만든다.
 			CardView cardView = new CardView();
@@ -58,9 +58,9 @@ public class TimelineBO { //화면용 객체를 가공하는 곳, DB와는 관�
 			int likeCount = likeBO.getLikeCountByPostId(post.getId());
 			cardView.setLikeCount(likeCount);
 			
-			// 로그인된 사람이 좋아요를 했는지 여부(비로그인 사용자 고려).............!
-			//boolean filledLike = likeBO.getLikeCountByPostIdUserUserId(post.getId());
-			//cardView.setFilledLike(filledLike);
+			// 로그인된 사람이 좋아요를 했는지 여부(비로그인 사용자 고려)
+//			boolean filledLike = likeBO.getLikeCountByPostIdUserId(post.getId(), );
+//			cardView.setFilledLike(filledLike);
 			
 			// ★★★★★ 마지막에 cardView를 list에 넣는다.
 			cardViewList.add(cardView);

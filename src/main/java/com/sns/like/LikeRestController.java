@@ -35,7 +35,7 @@ public class LikeRestController {
 		}
 		
 		// BO 호출 -> likeToggle
-		likeBO.likeToggle(postId, postId);
+		likeBO.likeToggle(postId, userId);
 		
 		// 응답값
 		result.put("code", 200);

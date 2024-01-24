@@ -50,7 +50,7 @@
 						<img src="https://www.iconninja.com/files/214/518/441/heart-icon.png" width="18" height="18" alt="empty heart">
 					</a>
 					
-					좋아요 13개${card.likeCount}
+					좋아요 ${card.likeCount}개
 				</div>
 				
 				<%-- 글 --%>
