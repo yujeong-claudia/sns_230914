@@ -17,20 +17,20 @@ public class LikeRestController {
 	
 	@Autowired
 	private LikeBO likeBO;
-	
-	// GET: /like?postId @RequestParam("postId")
-	// GET: /like?13	@PathVariable
+
+	// GET:  /like?postId=13     @RequestParam("postId")
+	// GET:  /like/13            @PathVariable
 	@RequestMapping("/like/{postId}")
 	public Map<String, Object> likeToggle(
 			@PathVariable(name = "postId") int postId,
 			HttpSession session) {
 		
+		// 로그인 여부 확인 
 		Map<String, Object> result = new HashMap<>();
-		// 로그인 여부 확인
 		Integer userId = (Integer)session.getAttribute("userId");
 		if (userId == null) {
 			result.put("code", 300);
-			result.put("error_message", "로그인이 되지 않은 사용자 입니다.");
+			result.put("error_message", "로그인을 해주세요.");
 			return result;
 		}
 		
