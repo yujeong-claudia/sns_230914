@@ -34,9 +34,12 @@
 				<div class="p-2 d-flex justify-content-between">
 					<span class="font-weight-bold">${card.user.loginId}</span>
 					
-					<a href="#" class="more-btn">
+					<%-- (더보기... 버튼) 로그인 된 사람과 글쓴이 정보가 일치할 때 노출 --%>
+					<c:if test="${userId eq card.post.userId}">
+					<a href="#" class="more-btn" data-toggle="modal" data-target="#modal" data-post-id="${card.post.id}">
 						<img src="https://www.iconninja.com/files/860/824/939/more-icon.png" width="30">
 					</a>
+					</c:if>
 				</div>	
 				
 				<%-- 카드 이미지 --%>
@@ -98,6 +101,25 @@
 			</c:forEach>
 		</div> <%--// 타임라인 영역 끝  --%>
 	</div> <%--// contents-box 끝  --%>
+</div>
+
+
+<!-- Modal -->
+<div class="modal fade" id="modal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  	<%-- 
+  		modal-sm: 작은 모달창 
+  		modal-dialog-centered: 수직 기준 가운데 위치
+  	--%>
+  	<div class="modal-dialog modal-sm modal-dialog-centered">
+    	<div class="modal-content text-center">
+    		<div class="py-3 border-bottom">
+				<a href="#" id="postDelete">삭제하기</a>      
+    		</div>
+    		<div class="py-3">
+				<a href="#" data-dismiss="modal">취소하기</a>      
+    		</div>
+    	</div>
+  	</div>
 </div>
 
 <script>
@@ -275,6 +297,41 @@
 				}
 				, error:function(request, status, error) {
 					alert("좋아요를 하는데 실패했습니다.");
+				}
+			});
+		});
+		
+		// 더보기 버튼(...) 클릭 => 모달 띄우기
+		$(".more-btn").on('click', function(e) {
+			e.preventDefault(); // a 태그 올라가는 현상 방지
+			
+			let postId = $(this).data("post-id"); // getting -> 파라미터가 1개
+			//alert(postId);
+			
+			// 1개로 존재하는 모달에 재활용을 위해 data-post-id를 심는다.(...) 버튼을 누를 때마다
+			$("#modal").data("post-id", postId); // setting  -> 파라미터가 2개
+		});
+		
+		// 모달 안에 있는 삭제하기 클릭
+		$("#modal #postDelete").on('click', function(e) {
+			e.preventDefault(); // a 태그 올라가는 현상 방지
+			
+			let postId = $("#modal").data("post-id");
+			//alert(postId);
+			
+			$.ajax({
+				type:"DELETE"
+				, url:"/post/delete"
+				, data:{"postId":postId}
+				, success:function(data) {
+					if (data.code == 200) {
+						location.reload(true);
+					} else {
+						alert(data.error_message);
+					}
+				}
+				, error:function(request, status, error) {
+					alert("모달을 삭제 하는데 실패했습니다.");
 				}
 			});
 		});
